@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mes Projets</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <style>
+    *, *::before, *::after { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+
+    @keyframes blob {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(40px, -60px) scale(1.12); }
+      66%       { transform: translate(-30px, 25px) scale(0.9); }
+    }
+    @keyframes blob2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(-50px, 35px) scale(1.15); }
+      66%       { transform: translate(25px, -45px) scale(0.88); }
+    }
+    @keyframes blob3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(25px, 50px) scale(0.92); }
+      66%       { transform: translate(-35px, -25px) scale(1.1); }
+    }
+    .blob-1 { animation: blob  14s ease-in-out infinite; }
+    .blob-2 { animation: blob2 18s ease-in-out infinite; }
+    .blob-3 { animation: blob3 22s ease-in-out infinite; }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+    }
+    .glass-strong {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 22px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.055), 0 1px 10px rgba(0,0,0,0.035);
+      border: none;
+      transition: transform 0.35s cubic-bezier(.22,.68,0,1.2), box-shadow 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px) scale(1.025);
+      box-shadow: 0 20px 60px rgba(59,90,224,0.13), 0 4px 20px rgba(0,0,0,0.07);
+    }
+
+    .tag {
+      background: rgba(59, 90, 224, 0.09);
+      color: #3b5ae0;
+      border-radius: 100px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding: 4px 12px;
+    }
+
+    .stat-bar {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 20px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    }
+
+    .nav-pill {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 100px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .nav-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #6b7280;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+    }
+    .nav-btn:hover { background: rgba(255,255,255,0.7); color: #3b5ae0; }
+
+    #progress { transition: width 0.12s linear; }
+
+    .toggle-group {
+      background: rgba(0,0,0,0.055);
+      border-radius: 100px;
+      padding: 3px;
+      display: flex;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+    .toggle-btn {
+      border: none;
+      background: transparent;
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #6b7280;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      white-space: nowrap;
+      font-family: inherit;
+    }
+    .toggle-btn.active {
+      background: #fff;
+      color: #111827;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.06);
+    }
+    .search-input {
+      height: 36px;
+      border: 1.5px solid rgba(0,0,0,0.10);
+      border-radius: 100px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      font-size: 0.82rem;
+      color: #111827;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      padding: 0 14px 0 34px;
+      width: 100%;
+      font-family: inherit;
+    }
+    .search-input:focus {
+      border-color: #3b5ae0;
+      box-shadow: 0 0 0 3px rgba(59,90,224,0.10);
+    }
+    .search-input::placeholder { color: #9ca3af; }
+    .badge-perso {
+      background: #EAF3DE; color: #27500A;
+      border-radius: 100px; font-size: 0.72rem;
+      font-weight: 700; letter-spacing: 0.04em; padding: 4px 12px;
+    }
+    .badge-pro {
+      background: #E6F1FB; color: #0C447C;
+      border-radius: 100px; font-size: 0.72rem;
+      font-weight: 700; letter-spacing: 0.04em; padding: 4px 12px;
+    }
+    .card[style*="display: none"] { display: none !important; }
+  </style>
+</head>
+<body class="min-h-screen overflow-x-hidden" style="background: #f5f6fa;">
+
+  <!-- ── Progress bar ── -->
+  <div class="fixed top-0 left-0 right-0 z-50 h-1" style="background:rgba(0,0,0,0.06);">
+    <div id="progress" class="h-full" style="width:0%; background: linear-gradient(90deg,#3b5ae0,#818cf8);"></div>
+  </div>
+
+  <!-- ── Liquid Mesh background ── -->
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none" style="opacity:.42;">
+    <div class="blob-1 absolute rounded-full" style="width:520px;height:520px;top:-80px;left:10%;background:#bfdbfe;filter:blur(110px);"></div>
+    <div class="blob-2 absolute rounded-full" style="width:440px;height:440px;top:30%;right:8%;background:#c7d2fe;filter:blur(100px);"></div>
+    <div class="blob-3 absolute rounded-full" style="width:380px;height:380px;bottom:10%;left:35%;background:#fef9c3;filter:blur(100px);"></div>
+    <div class="blob-1 absolute rounded-full" style="width:300px;height:300px;bottom:5%;right:20%;background:#e0e7ff;filter:blur(90px);animation-delay:-6s;"></div>
+  </div>
+
+  <!-- ── Main ── -->
+  <main class="mx-auto max-w-4xl px-6 pt-24 pb-44">
+
+    <!-- Hero -->
+    <div class="text-center mb-14">
+      <p class="text-xs font-bold tracking-widest uppercase mb-5" style="color:#3b5ae0;letter-spacing:.18em;">Dashboard</p>
+      <h1 class="font-black tracking-tighter mb-4 leading-none" style="font-size:clamp(3rem,7vw,5rem);color:#111827;">Mes Projets</h1>
+      <p class="text-base" style="color:#4b5563;">Sélectionnez un projet pour l'ouvrir</p>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="stat-bar flex items-center gap-5 px-6 py-4 mb-8">
+      <div class="flex items-center gap-2">
+        <i data-lucide="layers" style="width:16px;height:16px;color:#3b5ae0;"></i>
+        <span class="text-sm font-bold" style="color:#111827;" id="count-label">2 projets</span>
+      </div>
+      <div style="width:1px;height:18px;background:#e5e7eb;"></div>
+      <div class="flex items-center gap-2">
+        <i data-lucide="calendar-days" style="width:15px;height:15px;color:#9ca3af;"></i>
+        <span class="text-sm" style="color:#4b5563;" id="today"></span>
+      </div>
+    </div>
+
+    <!-- ── Filter bar ── -->
+    <div class="flex items-center gap-3 mb-6">
+      <div class="toggle-group">
+        <button class="toggle-btn active" data-filter="tous">Tous</button>
+        <button class="toggle-btn" data-filter="perso">Perso</button>
+        <button class="toggle-btn" data-filter="pro">Pro</button>
+      </div>
+      <div class="flex-1 relative">
+        <i data-lucide="search" class="absolute top-1/2 -translate-y-1/2" style="left:12px;width:14px;height:14px;color:#9ca3af;pointer-events:none;"></i>
+        <input id="search-input" type="text" class="search-input" placeholder="Rechercher un projet…">
+      </div>
+    </div>
+
+    <!-- ── Project cards ── -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="projects-grid">
+
+      <!-- ── Exemple ── -->
+      <a href="projects/exemple/index.html" data-context="perso" class="card block p-5 no-underline group">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center justify-center w-10 h-10 text-xl rounded-xl" style="background:rgba(59,90,224,.09);">📁</div>
+          <div class="flex items-center justify-center w-9 h-9 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 scale-75 group-hover:scale-100" style="background:#3b5ae0;">
+            <i data-lucide="arrow-right" style="width:16px;height:16px;color:#fff;"></i>
+          </div>
+        </div>
+        <h2 class="font-bold text-base tracking-tight mb-1" style="color:#111827;">Exemple</h2>
+        <p class="text-sm leading-relaxed" style="color:#4b5563;">Un projet de démonstration.</p>
+        <div class="mt-4 flex items-center gap-2"><span class="tag">Template</span><span class="badge-perso">Perso</span></div>
+      </a>
+
+      <!-- ── T2J ── -->
+      <a href="https://usine-a-sites.s3.eu-west-1.amazonaws.com/0_host/T2J_v4.html" target="_blank" rel="noopener" data-context="pro" class="card block p-5 no-underline group">
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex items-center justify-center w-10 h-10 text-xl rounded-xl" style="background:rgba(59,90,224,.09);">🔗</div>
+          <div class="flex items-center justify-center w-9 h-9 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-200 scale-75 group-hover:scale-100" style="background:#3b5ae0;">
+            <i data-lucide="external-link" style="width:16px;height:16px;color:#fff;"></i>
+          </div>
+        </div>
+        <h2 class="font-bold text-base tracking-tight mb-1" style="color:#111827;">T2J</h2>
+        <p class="text-sm leading-relaxed" style="color:#4b5563;">Teams 2 Jira</p>
+        <div class="mt-4 flex items-center gap-2"><span class="tag">Externe</span><span class="badge-pro">Pro</span></div>
+      </a>
+
+      <!-- Ajouter de nouveaux projets ici -->
+
+    </div>
+  </main>
+
+  <!-- ── Bottom floating nav ── -->
+  <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-40">
+    <div class="nav-pill flex items-center gap-3 px-4 py-2">
+      <button class="nav-btn" title="Haut de page" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i data-lucide="home" style="width:17px;height:17px;"></i>
+      </button>
+      <div style="width:1px;height:20px;background:#e5e7eb;"></div>
+      <span class="font-mono text-sm font-semibold" style="color:#111827;letter-spacing:.05em;" id="nav-count">02</span>
+      <span class="text-xs" style="color:#9ca3af;">projets</span>
+      <div style="width:1px;height:20px;background:#e5e7eb;"></div>
+      <button class="nav-btn" title="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i data-lucide="chevrons-up" style="width:17px;height:17px;"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    // Date
+    document.getElementById('today').textContent = new Date().toLocaleDateString('fr-FR', {
+      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+    });
+
+    // ── Filtering ──
+    let activeFilter = 'tous';
+
+    function applyFilters() {
+      const query = document.getElementById('search-input').value.trim().toLowerCase();
+      const allCards = document.querySelectorAll('#projects-grid a');
+      let visible = 0;
+      allCards.forEach(card => {
+        const ctx = card.dataset.context || '';
+        const name = (card.querySelector('h2')?.textContent || '').toLowerCase();
+        const desc = (card.querySelector('p')?.textContent || '').toLowerCase();
+        const matchCtx = activeFilter === 'tous' || ctx === activeFilter;
+        const matchSearch = !query || name.includes(query) || desc.includes(query);
+        if (matchCtx && matchSearch) {
+          card.style.display = '';
+          visible++;
+        } else {
+          card.style.display = 'none';
+        }
+      });
+      document.getElementById('count-label').textContent = visible + ' projet' + (visible > 1 ? 's' : '');
+      document.getElementById('nav-count').textContent = String(visible).padStart(2, '0');
+    }
+
+    document.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeFilter = btn.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    document.getElementById('search-input').addEventListener('input', applyFilters);
+
+    applyFilters();
+
+    // Scroll progress
+    function updateProgress() {
+      const scrolled = document.documentElement.scrollTop;
+      const total = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('progress').style.width = (total > 0 ? (scrolled / total) * 100 : 100) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  </script>
+</body>
+</html>
