@@ -3,74 +3,119 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exemple — Projet</title>
+  <title>Template — Mes Projets</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23185FA5'/%3E%3Crect x='14' y='14' width='16' height='16' rx='2' fill='white' opacity='0.9'/%3E%3Crect x='34' y='14' width='16' height='16' rx='2' fill='white' opacity='0.6'/%3E%3Crect x='14' y='34' width='16' height='16' rx='2' fill='white' opacity='0.6'/%3E%3Crect x='34' y='34' width='16' height='16' rx='2' fill='white' opacity='0.3'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --border: #2e3150;
-      --accent: #6c63ff;
-      --accent-light: #8b85ff;
-      --text: #e2e4f0;
-      --text-muted: #7b7f9e;
+    *, *::before, *::after { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; }
+
+    @keyframes blob {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(40px, -60px) scale(1.12); }
+      66%       { transform: translate(-30px, 25px) scale(0.9); }
     }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+    @keyframes blob2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(-50px, 35px) scale(1.15); }
+      66%       { transform: translate(25px, -45px) scale(0.88); }
     }
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 28px;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
+    @keyframes blob3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33%       { transform: translate(25px, 50px) scale(0.92); }
+      66%       { transform: translate(-35px, -25px) scale(1.1); }
     }
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      transition: color 0.2s;
+    .blob-1 { animation: blob  14s ease-in-out infinite; }
+    .blob-2 { animation: blob2 18s ease-in-out infinite; }
+    .blob-3 { animation: blob3 22s ease-in-out infinite; }
+
+    .card {
+      background: rgba(255, 255, 255, 0.82);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 22px;
+      box-shadow: 0 4px 40px rgba(0,0,0,0.055), 0 1px 10px rgba(0,0,0,0.035);
     }
-    nav a:hover { color: var(--accent-light); }
-    nav .sep { color: var(--border); }
-    nav .current { color: var(--text); font-weight: 600; }
-    main {
-      flex: 1;
-      padding: 60px 28px;
-      max-width: 900px;
-      margin: 0 auto;
-      width: 100%;
+
+    .nav-pill {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      border-radius: 100px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
     }
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      background: linear-gradient(135deg, var(--accent-light), #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .nav-btn {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #6b7280;
+      transition: background 0.2s, color 0.2s;
+      cursor: pointer;
+      border: none;
+      background: transparent;
     }
-    p { color: var(--text-muted); line-height: 1.6; }
+    .nav-btn:hover { background: rgba(255,255,255,0.7); color: #3b5ae0; }
+
+    #progress { transition: width 0.12s linear; }
   </style>
 </head>
-<body>
-  <nav>
-    <a href="../../index.html">← Hub</a>
-    <span class="sep">/</span>
-    <span class="current">Exemple</span>
-  </nav>
-  <main>
-    <h1>Projet Exemple</h1>
-    <p>Contenu du projet à venir. Modifiez ce fichier pour démarrer.</p>
+<body class="min-h-screen overflow-x-hidden" style="background: #f5f6fa;">
+
+  <!-- ── Progress bar ── -->
+  <div class="fixed top-0 left-0 right-0 z-50 h-1" style="background:rgba(0,0,0,0.06);">
+    <div id="progress" class="h-full" style="width:0%; background: linear-gradient(90deg,#3b5ae0,#818cf8);"></div>
+  </div>
+
+  <!-- ── Liquid Mesh background ── -->
+  <div class="fixed inset-0 -z-10 overflow-hidden pointer-events-none" style="opacity:.42;">
+    <div class="blob-1 absolute rounded-full" style="width:520px;height:520px;top:-80px;left:10%;background:#bfdbfe;filter:blur(110px);"></div>
+    <div class="blob-2 absolute rounded-full" style="width:440px;height:440px;top:30%;right:8%;background:#c7d2fe;filter:blur(100px);"></div>
+    <div class="blob-3 absolute rounded-full" style="width:380px;height:380px;bottom:10%;left:35%;background:#fef9c3;filter:blur(100px);"></div>
+    <div class="blob-1 absolute rounded-full" style="width:300px;height:300px;bottom:5%;right:20%;background:#e0e7ff;filter:blur(90px);animation-delay:-6s;"></div>
+  </div>
+
+  <!-- ── Main ── -->
+  <main class="mx-auto max-w-4xl px-6 pt-24 pb-44">
+
+    <!-- Hero -->
+    <div class="text-center mb-14">
+      <p class="text-xs font-bold tracking-widest uppercase mb-5" style="color:#3b5ae0;letter-spacing:.18em;">Projet</p>
+      <h1 class="font-black tracking-tighter mb-4 leading-none" style="font-size:clamp(3rem,7vw,5rem);color:#111827;">Template</h1>
+      <p class="text-base" style="color:#4b5563;">Ceci est un projet template</p>
+    </div>
+
+    <!-- Contenu du projet -->
+    <div class="card p-8">
+      <p class="text-sm" style="color:#9ca3af;">Contenu du projet à venir. Modifiez ce fichier pour démarrer.</p>
+    </div>
+
   </main>
+
+  <!-- ── Bottom floating nav ── -->
+  <div class="fixed bottom-8 left-1/2 -translate-x-1/2 z-40">
+    <div class="nav-pill flex items-center gap-3 px-4 py-2">
+      <button class="nav-btn" title="Retour au dashboard" onclick="window.location.href='../../index.html'">
+        <i data-lucide="home" style="width:17px;height:17px;"></i>
+      </button>
+      <div style="width:1px;height:20px;background:#e5e7eb;"></div>
+      <button class="nav-btn" title="Retour en haut" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <i data-lucide="chevrons-up" style="width:17px;height:17px;"></i>
+      </button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    function updateProgress() {
+      const scrolled = document.documentElement.scrollTop;
+      const total = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('progress').style.width = (total > 0 ? (scrolled / total) * 100 : 100) + '%';
+    }
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  </script>
 </body>
 </html>
