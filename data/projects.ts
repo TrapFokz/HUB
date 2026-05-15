@@ -12,24 +12,28 @@ export interface Project {
   tags: string[]
 }
 
-export const projects: Project[] = [
-  {
-    id: 'template',
-    name: 'Template',
-    description: 'Voici un template',
-    emoji: '📁',
-    href: '/projects/template/index.html',
-    context: 'perso',
-    tags: ['Template'],
-  },
-  {
-    id: 't2j',
-    name: 'T2J',
-    description: 'Teams 2 Jira',
-    emoji: '🔗',
-    href: 'https://usine-a-sites.s3.eu-west-1.amazonaws.com/0_host/T2J_v4.html',
-    external: true,
-    context: 'pro',
-    tags: ['Externe'],
-  },
-]
+export interface SupabaseProject {
+  id: string
+  nom: string
+  description: string
+  type: 'local' | 'externe'
+  url: string
+  contexte: Context
+  icone: string
+  tags: string[]
+  statut: string
+  created_at: string
+}
+
+export function mapSupabaseProject(row: SupabaseProject): Project {
+  return {
+    id: row.id,
+    name: row.nom,
+    description: row.description,
+    emoji: row.icone,
+    href: row.url,
+    external: row.type === 'externe',
+    context: row.contexte,
+    tags: row.tags ?? [],
+  }
+}

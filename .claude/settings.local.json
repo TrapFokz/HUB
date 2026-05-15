@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Remove-Item \"c:\\\\Users\\\\l.lefevre\\\\projects-hub\\\\app\\\\auth\\\\callback\\\\route.ts\")",
+      "Bash(rm \"c:/Users/l.lefevre/projects-hub/app/auth/callback/route.ts\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\l.lefevre\\projects-hub\\app\\auth\\callback"
+    ]
+  }
+}
